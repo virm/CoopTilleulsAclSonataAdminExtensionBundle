@@ -95,8 +95,9 @@ class AclAdminExtension extends AdminExtension
             }
 
             if (count($ids)) {
+                $alias = current($query->getDQLPart('from'))->getAlias();
                 $query
-                    ->andWhere('o.id IN (:ids)')
+                    ->andWhere("{$alias}.id IN (:ids)")
                     ->setParameter('ids', $ids)
                 ;
 
